@@ -1,0 +1,6 @@
+@CRM.JFCL.WebAPI_HostAddress = http://localhost:5288
+
+GET {{CRM.JFCL.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

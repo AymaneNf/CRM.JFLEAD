@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CRM.Contact.Domain\CRM.JFCT.Domain.csproj" />
+    <ProjectReference Include="..\CRM.JFOP.Domain\CRM.JFOP.Domain.csproj" />
+    <ProjectReference Include="..\CRM.JFTE.Domain\CRM.JFTE.Domain.csproj" />
+    <ProjectReference Include="..\CRM.SharedKernel.Domain\CRM.SharedKernel.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

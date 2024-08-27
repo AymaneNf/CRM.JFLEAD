@@ -22,10 +22,6 @@ namespace CRM.JFLEAD.App
             {
                 lead.Status = LeadStatus.Nouveau;
                 var createdLead = await _leadRepository.AddLeadAsync(lead);
-                if (createdLead != null)
-                {
-                    _logger.LogInformation($"Lead created with ID: {createdLead.Id}");
-                }
                 return createdLead;
             }
             catch (Exception ex)

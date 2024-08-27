@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CRM.JFCL.App\CRM.JFCL.App.csproj" />
+    <ProjectReference Include="..\CRM.JFCL.Domain\CRM.JFCL.Domain.csproj" />
+    <ProjectReference Include="..\CRM.JFPP.Core\CRM.JFPP.Core.csproj" />
+    <ProjectReference Include="..\CRM.JFPP.Domain\CRM.JFPP.Domain.csproj" />
+    <ProjectReference Include="..\CRM.JFTE.Domain\CRM.JFTE.Domain.csproj" />
+    <ProjectReference Include="..\CRM.SharedKernel.Core\CRM.SharedKernel.Core.csproj" />
+  </ItemGroup>
+
+</Project>

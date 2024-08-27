@@ -1,5 +1,6 @@
 ﻿using CRM.JFLEAD.App;
 using CRM.JFLEAD.Core;
+using CRM.JFLEAD.Domain;
 using CRM.SharedKernel.App;
 using CRM.SharedKernel.Core;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace CRM.JFLEAD.Infrastructure
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<Lead,AppDbContext>), typeof(GenericRepository<Lead,AppDbContext>));
             services.AddScoped<ILeadRepository, LeadRepository>();
             services.AddScoped<ILeadService, LeadService>();
             services.AddScoped<DataManagement>();

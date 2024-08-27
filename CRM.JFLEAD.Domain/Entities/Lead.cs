@@ -2,19 +2,6 @@
 
 namespace CRM.JFLEAD.Domain
 {
-    public enum LeadType
-    {
-        Societe,
-        Individu
-    }
-    public enum LeadStatus
-    {
-        Nouveau,
-        Assigne,
-        EnCours,
-        ConvertiGagne,
-        ConvertiPerdu
-    }
 
     public class Lead : BaseEntity
     {
@@ -27,13 +14,13 @@ namespace CRM.JFLEAD.Domain
         public string? CodePostale { get; set; }
         public string? Ville { get; set; }
         public string? Region { get; set; }
-        public string? Paye { get; set; }
-        public string? TelephoneFixe { get; set; }
+        public string? Pays { get; set; }
+        public string? Telephone { get; set; }
         public string? Fax { get; set; }
         public string? Email { get; set; }
         public string? SiteWeb { get; set; }
         public string? Categorie { get; set; }
-        public string? SecteurDActivite { get; set; }
+        public string? SecteurActivite { get; set; }
         public string? Provenance { get; set; }
         public LeadStatus Status { get; set; }
         public int AssignedTo { get; set; }

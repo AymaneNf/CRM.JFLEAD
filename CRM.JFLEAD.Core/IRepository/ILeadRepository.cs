@@ -2,7 +2,7 @@
 
 namespace CRM.JFLEAD.Core
 {
-    public interface ILeadRepository
+    public interface ILeadRepository 
     {
         Task<Lead?> AddLeadAsync(Lead entity);
         Task<Lead?> UpdateLeadAsync(Lead entity);

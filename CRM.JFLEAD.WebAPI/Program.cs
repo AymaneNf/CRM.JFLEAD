@@ -4,7 +4,6 @@ using CRM.JFLEAD.Domain;
 using CRM.JFLEAD.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
-
 public class Program
 {
     public static void Main(string[] args)
@@ -15,19 +14,16 @@ public class Program
         builder.Services.AddLeadService(builder.Configuration);
         builder.Services.AddLogging();
 
-
-
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-
         app.UseHttpsRedirection();
 
         // Initialisation de la base de données
         app.MapGet("/initdb", async (DataManagement dbManagement) =>
         {
             await dbManagement.InitDatabase();
-            return "OK";
+            return Results.Ok("Database initialized.");
         });
 
         // Endpoints for leads
@@ -37,7 +33,7 @@ public class Program
             return createdLead != null ? Results.Created($"/api/leads/{createdLead.Id}", createdLead) : Results.BadRequest();
         });
 
-        app.MapPut("/api/leads/{id}", async (Guid id, [FromBody] Lead lead, ILeadService leadService) =>
+        app.MapPut("/api/leads/{id:guid}", async (Guid id, [FromBody] Lead lead, ILeadService leadService) =>
         {
             if (id != lead.Id)
             {
@@ -47,13 +43,13 @@ public class Program
             return updatedLead != null ? Results.Ok(updatedLead) : Results.BadRequest();
         });
 
-        app.MapDelete("/api/leads/{id}", async (Guid id, ILeadService leadService) =>
+        app.MapDelete("/api/leads/{id:guid}", async (Guid id, ILeadService leadService) =>
         {
             var deletedLead = await leadService.DeleteLeadAsync(id);
             return deletedLead != null ? Results.Ok(deletedLead) : Results.NotFound();
         });
 
-        app.MapGet("/api/leads/{id}", async (Guid id, ILeadService leadService) =>
+        app.MapGet("/api/leads/{id:guid}", async (Guid id, ILeadService leadService) =>
         {
             var lead = await leadService.GetLeadByIdAsync(id);
             return lead != null ? Results.Ok(lead) : Results.NotFound();
@@ -65,37 +61,35 @@ public class Program
             return leads != null ? Results.Ok(leads) : Results.NoContent();
         });
 
-        app.MapPost("/api/leads/{id}/assign", async (Guid id, [FromBody] int collaboratorId, ILeadService leadService) =>
+        app.MapPost("/api/leads/{id:guid}/assign", async (Guid id, [FromBody] int collaboratorId, ILeadService leadService) =>
         {
             await leadService.AssignLeadAsync(id, collaboratorId);
             return Results.NoContent();
         });
 
-        app.MapPost("/api/leads/{id}/start", async (Guid id, ILeadService leadService) =>
+        app.MapPost("/api/leads/{id:guid}/start", async (Guid id, ILeadService leadService) =>
         {
             await leadService.StartLeadAsync(id);
             return Results.NoContent();
         });
 
-        app.MapPost("/api/leads/{id}/convert/won", async (Guid id, ILeadService leadService) =>
+        app.MapPost("/api/leads/{id:guid}/convert/won", async (Guid id, ILeadService leadService) =>
         {
             await leadService.ConvertLeadToWonAsync(id);
             return Results.NoContent();
         });
 
-        app.MapPost("/api/leads/{id}/convert/lost", async (Guid id, ILeadService leadService) =>
+        app.MapPost("/api/leads/{id:guid}/convert/lost", async (Guid id, ILeadService leadService) =>
         {
             await leadService.MarkLeadAsLostAsync(id);
             return Results.NoContent();
         });
 
-        app.MapPost("/api/leads/{id}/event", async (Guid id, [FromBody] string eventDetails, ILeadService leadService) =>
+        app.MapPost("/api/leads/{id:guid}/event", async (Guid id, [FromBody] string eventDetails, ILeadService leadService) =>
         {
             await leadService.CreateEventFromLeadAsync(id, eventDetails);
             return Results.NoContent();
         });
-
-
 
         app.Run();
     }

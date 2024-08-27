@@ -2,16 +2,22 @@
 using CRM.SharedKernel.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.SharedKernel.App
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<TEntity, TDbContext> : IGenericRepository<TEntity, TDbContext>
+        where TEntity : BaseEntity
+        where TDbContext : DbContext
     {
-        private readonly DbContext _context;
-        private readonly ILogger<GenericRepository<TEntity>> _logger;
+        private readonly TDbContext _context;
+        private readonly ILogger<GenericRepository<TEntity, TDbContext>> _logger;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DbContext context, ILogger<GenericRepository<TEntity>> logger)
+        public GenericRepository(TDbContext context, ILogger<GenericRepository<TEntity, TDbContext>> logger)
         {
             _context = context;
             _logger = logger;
@@ -24,6 +30,7 @@ namespace CRM.SharedKernel.App
             {
                 await _dbSet.AddAsync(entity);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation($"{typeof(TEntity).Name} with Id {entity.Id} created successfully");
                 return entity;
             }
             catch (Exception ex)
@@ -39,6 +46,7 @@ namespace CRM.SharedKernel.App
             {
                 _dbSet.Update(entity);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation($"{typeof(TEntity).Name} with Id {entity.Id} updated successfully");
                 return entity;
             }
             catch (Exception ex)
@@ -60,6 +68,7 @@ namespace CRM.SharedKernel.App
                 }
                 _dbSet.Remove(entity);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation($"{typeof(TEntity).Name} with Id {entity.Id} deleted successfully");
                 return entity;
             }
             catch (Exception ex)
@@ -92,6 +101,24 @@ namespace CRM.SharedKernel.App
             {
                 _logger.LogError(ex, $"An error occurred while retrieving all entities of type {typeof(TEntity).Name}");
                 return null;
+            }
+        }
+
+        public async Task<IEnumerable<TEntity>> SearchAsync(Func<TEntity, bool> predicate)
+        {
+            try
+            {
+                // Since predicate is a function, we need to bring all data in memory to apply it.
+                // Be cautious with this in large datasets, prefer using IQueryable for large datasets.
+                var allEntities = await _dbSet.ToListAsync();
+                var filteredEntities = allEntities.Where(predicate);
+                _logger.LogInformation($"{filteredEntities.Count()} entities of type {typeof(TEntity).Name} found based on search criteria");
+                return filteredEntities;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"An error occurred while searching entities of type {typeof(TEntity).Name}");
+                return Enumerable.Empty<TEntity>();
             }
         }
     }

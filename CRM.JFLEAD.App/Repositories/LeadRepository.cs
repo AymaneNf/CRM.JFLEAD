@@ -1,107 +1,51 @@
 ﻿using CRM.JFLEAD.Core;
 using CRM.JFLEAD.Domain;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using CRM.SharedKernel.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.JFLEAD.App
 {
     public class LeadRepository : ILeadRepository
     {
-        private readonly AppDbContext _context;
-        private readonly ILogger<LeadRepository> _logger;
+        private readonly IGenericRepository<Lead, AppDbContext> _repository;
 
-        public LeadRepository(AppDbContext context, ILogger<LeadRepository> logger)
+        public LeadRepository(IGenericRepository<Lead, AppDbContext> repository)
         {
-            _context = context;
-            _logger = logger;
+            _repository = repository;
         }
 
         public async Task<Lead?> AddLeadAsync(Lead entity)
         {
-            try
-            {
-                await _context.Leads.AddAsync(entity);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation($"Lead created with ID: {entity.Id}");
-                return entity;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while adding the lead");
-                return null;
-            }
+            return await _repository.AddAsync(entity);
         }
 
         public async Task<Lead?> UpdateLeadAsync(Lead entity)
         {
-            try
-            {
-                _context.Leads.Update(entity);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation($"Lead updated with ID: {entity.Id}");
-                return entity;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while updating the lead");
-                return null;
-            }
+            return await _repository.UpdateAsync(entity);
         }
 
         public async Task<Lead?> DeleteLeadAsync(Guid entityId)
         {
-            try
-            {
-                var lead = await _context.Leads.FindAsync(entityId);
-                if (lead == null)
-                {
-                    _logger.LogWarning($"Lead not found with ID: {entityId}");
-                    return null;
-                }
-                _context.Leads.Remove(lead);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation($"Lead deleted with ID: {entityId}");
-                return lead;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while deleting the lead");
-                return null;
-            }
+            return await _repository.DeleteAsync(entityId);
         }
 
         public async Task<Lead?> GetLeadByIdAsync(Guid entityId)
         {
-            try
-            {
-                var lead = await _context.Leads.FindAsync(entityId);
-                if (lead == null)
-                {
-                    _logger.LogWarning($"Lead not found with ID: {entityId}");
-                }
-                return lead;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while retrieving the lead by ID");
-                return null;
-            }
+           return await _repository.GetByIdAsync(entityId);
         }
 
         public async Task<IEnumerable<Lead>?> GetAllLeadsAsync()
         {
-            try
-            {
-                var leads = await _context.Leads.ToListAsync();
-                _logger.LogInformation($"Retrieved {leads.Count} leads");
-                return leads;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while retrieving all leads");
-                return null;
-            }
+            return await _repository.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<Lead>> SearchLeadsAsync(Func<Lead, bool> predicate)
+        {
+            var allLeads = await _repository.GetAllAsync();
+            return allLeads?.Where(predicate) ?? Enumerable.Empty<Lead>();
         }
     }
 }
-
