@@ -1,5 +1,6 @@
 ﻿using CRM.JFLEAD.Core;
 using CRM.JFLEAD.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 
@@ -7,6 +8,7 @@ namespace CRM.JFLEAD.App
 {
     public class LeadService : ILeadService
     {
+
         private readonly ILeadRepository _leadRepository;
         private readonly ILogger<LeadService> _logger;
 
@@ -14,6 +16,7 @@ namespace CRM.JFLEAD.App
         {
             _logger = logger;
             _leadRepository = leadRepository;
+
         }
 
         public async Task<Lead?> CreateLeadAsync(Lead lead)
@@ -21,8 +24,10 @@ namespace CRM.JFLEAD.App
             try
             {
                 lead.Status = LeadStatus.Nouveau;
+
                 var createdLead = await _leadRepository.AddLeadAsync(lead);
                 return createdLead;
+
             }
             catch (Exception ex)
             {
@@ -41,6 +46,7 @@ namespace CRM.JFLEAD.App
                     _logger.LogInformation($"Lead updated with ID: {lead.Id}");
                 }
                 return updatedLead;
+
             }
             catch (Exception ex)
             {

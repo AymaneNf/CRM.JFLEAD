@@ -14,5 +14,6 @@ namespace CRM.JFLEAD.Core
         Task ConvertLeadToWonAsync(Guid leadId);
         Task MarkLeadAsLostAsync(Guid leadId);
         Task CreateEventFromLeadAsync(Guid leadId, string eventDetails);
+
     }
 }

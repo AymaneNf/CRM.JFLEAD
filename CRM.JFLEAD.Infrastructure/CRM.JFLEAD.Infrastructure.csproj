@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CRM.JFLEAD.App\CRM.JFLEAD.App.csproj" />
     <ProjectReference Include="..\CRM.SharedKernel.App\CRM.SharedKernel.App.csproj" />
+
   </ItemGroup>
 
 </Project>

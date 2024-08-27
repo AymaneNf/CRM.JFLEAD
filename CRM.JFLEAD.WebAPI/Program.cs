@@ -4,6 +4,7 @@ using CRM.JFLEAD.Domain;
 using CRM.JFLEAD.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
+
 public class Program
 {
     public static void Main(string[] args)
@@ -14,16 +15,19 @@ public class Program
         builder.Services.AddLeadService(builder.Configuration);
         builder.Services.AddLogging();
 
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
+
         app.UseHttpsRedirection();
 
-        // Initialisation de la base de données
+        // Initialisation de la base de donnï¿½es
         app.MapGet("/initdb", async (DataManagement dbManagement) =>
         {
             await dbManagement.InitDatabase();
             return Results.Ok("Database initialized.");
+
         });
 
         // Endpoints for leads
@@ -61,7 +65,9 @@ public class Program
             return leads != null ? Results.Ok(leads) : Results.NoContent();
         });
 
+
         app.MapPost("/api/leads/{id:guid}/assign", async (Guid id, [FromBody] int collaboratorId, ILeadService leadService) =>
+
         {
             await leadService.AssignLeadAsync(id, collaboratorId);
             return Results.NoContent();
@@ -73,11 +79,13 @@ public class Program
             return Results.NoContent();
         });
 
+
         app.MapPost("/api/leads/{id:guid}/convert/won", async (Guid id, ILeadService leadService) =>
         {
             await leadService.ConvertLeadToWonAsync(id);
             return Results.NoContent();
         });
+
 
         app.MapPost("/api/leads/{id:guid}/convert/lost", async (Guid id, ILeadService leadService) =>
         {
@@ -94,3 +102,4 @@ public class Program
         app.Run();
     }
 }
+

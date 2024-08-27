@@ -1,4 +1,4 @@
-﻿using CRM.SharedKernel.Domain;
+using CRM.SharedKernel.Domain;
 
 namespace CRM.JFLEAD.Domain
 {
@@ -14,8 +14,10 @@ namespace CRM.JFLEAD.Domain
         public string? CodePostale { get; set; }
         public string? Ville { get; set; }
         public string? Region { get; set; }
+
         public string? Pays { get; set; }
         public string? Telephone { get; set; }
+
         public string? Fax { get; set; }
         public string? Email { get; set; }
         public string? SiteWeb { get; set; }
