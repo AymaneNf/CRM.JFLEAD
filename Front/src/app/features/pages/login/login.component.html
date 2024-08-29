@@ -1,0 +1,54 @@
+<div class="hero min-h-screen bg-base-200">
+  <div class="toast toast-top toast-end">
+    <div *ngIf="error" class="alert alert-error">
+      <span>Login error .</span>
+    </div>
+    <div *ngIf="worked" class="alert alert-success">
+      <span>Log in successfully</span>
+    </div>
+  </div>
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold">Login now!</h1>
+      <p class="py-6">
+       Enter your email and password
+      </p>
+    </div>
+    <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <form [formGroup]="loginForm" class="card-body" (ngSubmit)="onLoging()">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            formControlName="userName"
+            type="email"
+            placeholder="email"
+            class="input input-bordered"
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            required
+          />
+          <label class="label">
+            <a routerLink="/Register" class="label-text-alt link link-hover"
+              >Create an account</a
+            >
+          </label>
+        </div>
+        <div class="form-control mt-6">
+          <button class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

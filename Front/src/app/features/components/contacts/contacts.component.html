@@ -1,0 +1,243 @@
+<div class="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col justify-start">
+    <!-- Page content here -->
+    <div class="flex justify-start m-5">
+      <h1 class="text-3xl mb-5">Contacts : </h1>
+    </div>
+
+    <div class="flex justify-between items-center m-5">
+      <label class="input input-bordered flex items-center gap-2">
+        <input #searchInput type="text" class="grow" placeholder="Search" />
+        <kbd class="kbd kbd-sm">⌘</kbd>
+        <kbd class="kbd kbd-sm">Q</kbd>
+      </label>
+      <button onclick="my_modal_1.showModal()" class="btn btn-primary rounded-">Add Contact</button>
+    </div>
+
+
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">New Contact :</h3>
+
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">name</span>
+          </label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            required
+          />
+
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">email :</span>
+          </label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            required
+          />
+
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">phone Number : </span>
+          </label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            required
+          />
+
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">name</span>
+          </label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            required
+          />
+
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-primary mr-5">Add</button>
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="overflow-x-auto size-auto w-full">
+      <table class="table table-xs border mx-10">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>E-mail</th>
+          <th>Entreprise</th>
+          <th>Adresse</th>
+          <th>Civilite</th>
+          <th>Fonction</th>
+          <th>Telephone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+          <th>{{i}}</th>
+          <td>Cy Ganderton</td>
+          <td>Littel, Schaden and Vandervort</td>
+          <td>Canada</td>
+          <td>12/16/2020</td>
+          <td>(123) 456-7890</td>
+          <td>12/16/2020</td>
+          <td>(123) 456-7890</td>
+          <td><a href="https://example.com" target="_blank">example.com</a></td>
+        </tr>
+
+        <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </div>
+    <div class="flex items-center justify-center space-x-2 mt-5">
+      <input
+        class="btn btn-square"
+        type="radio"
+        name="options"
+        aria-label="1"
+        checked="checked" />
+      <input class="btn btn-square" type="radio" name="options" aria-label="2" />
+      <input class="btn btn-square" type="radio" name="options" aria-label="3" />
+      <input class="btn btn-square" type="radio" name="options" aria-label="4" />
+    </div>
+    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
+      Open drawer
+    </label>
+  </div>
+  <div class="drawer-side">
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+    <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+      <!-- Sidebar content here -->
+      <div class="flex justify-start m-5">
+        <h1 class="text-xl">Filter By :</h1>
+      </div>
+      <ul class="menu bg-base-200 rounded-box w-56">
+
+        <li>
+          <details open>
+            <summary>Personal Info</summary>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Nom
+                </label>
+              </li>
+
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Prenom
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Email
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Telephone
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Entreprise
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Adresse
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Civilite
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Submenu 2
+                </label>
+              </li>
+              <!-- Add more checkboxes as needed -->
+            </ul>
+          </details>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" class="checkbox" />
+            Submenu 1
+          </label>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</div>

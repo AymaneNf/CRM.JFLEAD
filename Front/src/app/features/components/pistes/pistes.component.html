@@ -1,0 +1,431 @@
+<div class="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col justify-start">
+    <!-- Page content here -->
+    <div class="flex justify-start m-5">
+      <h1 class="text-3xl mb-5">Leads:</h1>
+    </div>
+
+    <div class="flex justify-between items-center m-5">
+      <label class="input input-bordered flex items-center gap-2">
+        <input  type="text"
+                class="grow"
+                placeholder="Search"
+                [(ngModel)]="searchQuery"
+                (ngModelChange)="onSearch()"  />
+        <kbd class="kbd kbd-sm">⌘</kbd>
+        <kbd class="kbd kbd-sm">Q</kbd>
+      </label>
+      <button onclick="my_modal_1.showModal()" class="btn btn-primary rounded-">Add Lead</button>
+    </div>
+
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">New Lead:</h3>
+        <form  [formGroup]="leadForm" (ngSubmit)="onSubmit(leadForm.value)">
+          <!-- Lead Type -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Lead Type</span>
+            </label>
+            <select
+              formControlName="type"
+              class="select select-bordered"
+              required
+            >
+              <option value="{{LeadType.Societe}}">Societe</option>
+              <option value="{{LeadType.Individu}}">Individu</option>
+            </select>
+          </div>
+
+          <!-- Denomination -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Denomination</span>
+            </label>
+            <input
+              formControlName="denomination"
+              type="text"
+              placeholder="Denomination"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Civilite -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Civilite</span>
+            </label>
+            <input
+              formControlName="civilite"
+              type="text"
+              placeholder="Civilite"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Nom -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Nom</span>
+            </label>
+            <input
+              formControlName="nom"
+              type="text"
+              placeholder="Nom"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Prenom -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Prenom</span>
+            </label>
+            <input
+              formControlName="prenom"
+              type="text"
+              placeholder="Prenom"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Adresse -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Adresse</span>
+            </label>
+            <input
+              formControlName="adresse"
+              type="text"
+              placeholder="Adresse"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Code Postale -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Code Postale</span>
+            </label>
+            <input
+              formControlName="codePostale"
+              type="text"
+              placeholder="Code Postale"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Ville -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Ville</span>
+            </label>
+            <input
+              formControlName="ville"
+              type="text"
+              placeholder="Ville"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Region -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Region</span>
+            </label>
+            <input
+              formControlName="region"
+              type="text"
+              placeholder="Region"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Pays -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Pays</span>
+            </label>
+            <input
+              formControlName="pays"
+              type="text"
+              placeholder="Pays"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Telephone -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Telephone</span>
+            </label>
+            <input
+              formControlName="telephone"
+              type="tel"
+              placeholder="Telephone"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Fax -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Fax</span>
+            </label>
+            <input
+              formControlName="fax"
+              type="text"
+              placeholder="Fax"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input
+              formControlName="email"
+              type="email"
+              placeholder="Email"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Site Web -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Site Web</span>
+            </label>
+            <input
+              formControlName="siteWeb"
+              type="url"
+              placeholder="Site Web"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Categorie -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Categorie</span>
+            </label>
+            <input
+              formControlName="categorie"
+              type="text"
+              placeholder="Categorie"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Secteur Activite -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Secteur Activite</span>
+            </label>
+            <input
+              formControlName="secteurActivite"
+              type="text"
+              placeholder="Secteur Activite"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Provenance -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Provenance</span>
+            </label>
+            <input
+              formControlName="provenance"
+              type="text"
+              placeholder="Provenance"
+              class="input input-bordered"
+            />
+          </div>
+
+          <!-- Status -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Status</span>
+            </label>
+            <select
+              formControlName="status"
+              class="select select-bordered"
+              required
+            >
+              <option [ngValue]="LeadStatus.Nouveau">Nouveau</option>
+              <option [ngValue]="LeadStatus.Assigne">Assigne</option>
+              <option [ngValue]="LeadStatus.EnCours">EnCours</option>
+              <option [ngValue]="LeadStatus.ConvertiGagne">ConvertiGagne</option>
+              <option [ngValue]="LeadStatus.ConvertiPerdu">ConvertiPerdu</option>
+            </select>
+          </div>
+
+          <!-- Assigned To -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Assigned To</span>
+            </label>
+            <input
+              formControlName="assignedTo"
+              type="number"
+              placeholder="Assigned To"
+              class="input input-bordered"
+              required
+            />
+          </div>
+
+          <div class="modal-action">
+            <button type="submit" class="btn btn-primary mr-5">Add</button>
+            <button type="button" class="btn" >Close</button>
+          </div>
+        </form>
+      </div>
+      <button type="button" class="btn" >Close</button>
+
+    </dialog>
+
+    <div class="overflow-x-auto size-auto w-full">
+      <table class="table table-xs border mx-10">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Denomination</th>
+          <th>Civilite</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Adresse</th>
+          <th>Code Postale</th>
+          <th>Ville</th>
+          <th>Region</th>
+          <th>Pays</th>
+          <th>Telephone</th>
+          <th>Fax</th>
+          <th>Email</th>
+          <th>Site Web</th>
+          <th>Categorie</th>
+          <th>Secteur Activite</th>
+          <th>Provenance</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+          <th>Actions</th> <!-- Add a new column for actions -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let lead of filteredLeads; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ lead.type }}</td>
+          <td>{{ lead.denomination }}</td>
+          <td>{{ lead.civilite }}</td>
+          <td>{{ lead.nom }}</td>
+          <td>{{ lead.prenom }}</td>
+          <td>{{ lead.adresse }}</td>
+          <td>{{ lead.codePostale }}</td>
+          <td>{{ lead.ville }}</td>
+          <td>{{ lead.region }}</td>
+          <td>{{ lead.pays }}</td>
+          <td>{{ lead.telephone }}</td>
+          <td>{{ lead.fax }}</td>
+          <td>{{ lead.email }}</td>
+          <td>{{ lead.siteWeb }}</td>
+          <td>{{ lead.categorie }}</td>
+          <td>{{ lead.secteurActivite }}</td>
+          <td>{{ lead.provenance }}</td>
+          <td>{{ lead.status }}</td>
+          <td>{{ lead.assignedTo }}</td>
+          <td>
+            <button (click)="deleteLead(lead.id)" class="btn btn-error btn-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+              </svg>
+
+            </button> <!-- Add delete button -->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex items-center justify-center space-x-2 mt-5">
+      <input class="btn btn-square" type="radio" name="options" aria-label="1" checked="checked" />
+      <input class="btn btn-square" type="radio" name="options" aria-label="2" />
+      <input class="btn btn-square" type="radio" name="options" aria-label="3" />
+      <input class="btn btn-square" type="radio" name="options" aria-label="4" />
+    </div>
+
+    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+  </div>
+
+  <div class="drawer-side">
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+    <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+      <!-- Sidebar content here -->
+      <div class="flex justify-start m-5">
+        <h1 class="text-xl">Filter By:</h1>
+      </div>
+
+      <ul class="menu bg-base-200 rounded-box w-56">
+        <li>
+          <details open>
+            <summary>Personal Info</summary>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Nom
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Prenom
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Email
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Telephone
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Entreprise
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Adresse
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" class="checkbox" />
+                  Civilite
+                </label>
+              </li>
+              <!-- Add more checkboxes as needed -->
+            </ul>
+          </details>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" class="checkbox" />
+            Submenu 1
+          </label>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</div>
